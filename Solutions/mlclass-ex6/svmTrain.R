@@ -56,11 +56,11 @@ svmTrain  <-
     else {
       # Pre-compute the Kernel Matrix
       # The following can be slow due to the lack of vectorization
-      K <- zeros(m)
+      K <- rep(0,m)
       for (i in 1:m) {
-        for (i in i:m) {
-          k[i,j] <- kernelFunction(t(X[i,]), t(x[j,]))
-          k[j,i] <- k[i,j] #the matrix is symmetric
+        for (j in 1:m) {
+          K[i,j] <- kernelFunction(t(X[i,]), t(X[j,]))
+          K[j,i] <- K[i,j] #the matrix is symmetric
         }
       }
     }
